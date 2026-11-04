@@ -1,0 +1,61 @@
+/* چیدمان ریسپانسیو: موبایل ← تبلت ← دسکتاپ */
+#app{min-height:100dvh}
+.main{
+  padding:calc(env(safe-area-inset-top) + 12px) 16px calc(110px + env(safe-area-inset-bottom));
+  max-width:1280px;margin-inline:auto;
+}
+.topbar{display:flex;align-items:center;gap:12px;min-height:56px;margin-bottom:12px}
+.brand-m{display:flex;align-items:center;gap:10px;font-size:1.05rem}
+.logo{width:40px;height:40px;border-radius:14px;display:grid;place-items:center;color:var(--on-accent);background:linear-gradient(135deg,var(--a1),var(--a2));box-shadow:0 8px 24px -8px var(--a1)}
+.brand-m .logo{width:34px;height:34px;border-radius:12px}
+.topbar h1{flex:1;font-size:1.15rem;text-align:center}
+.top-actions{margin-inline-start:auto;display:flex;gap:8px}
+.view{display:flex;flex-direction:column;gap:16px}
+
+/* ناوبری پایین (موبایل) */
+.bottom-nav{
+  position:fixed;z-index:50;inset-inline:12px;bottom:calc(10px + env(safe-area-inset-bottom));
+  display:flex;justify-content:space-around;padding:6px;border-radius:26px;
+}
+.tab{flex:1;min-height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  font-size:.7rem;color:var(--text-dim);border-radius:20px;position:relative;transition:color var(--dur-2),background var(--dur-2)}
+.tab.active{color:var(--text);background:linear-gradient(135deg,color-mix(in srgb,var(--a1) 35%,transparent),color-mix(in srgb,var(--a2) 25%,transparent))}
+.tab.active svg{color:var(--a1)}
+.sidebar{display:none}
+
+.bucket-grid{display:grid;gap:14px;grid-template-columns:1fr}
+.two-col{display:grid;gap:16px;grid-template-columns:1fr}
+
+/* تبلت */
+@media (min-width:700px){
+  .main{padding-inline:28px}
+  .bucket-grid{grid-template-columns:repeat(2,1fr)}
+  .two-col{grid-template-columns:1fr 1fr}
+  .bottom-nav{inset-inline:auto;left:50%;transform:translateX(-50%);width:min(520px,90vw)}
+}
+/* دسکتاپ */
+@media (min-width:1024px){
+  #app{display:grid;grid-template-columns:260px 1fr;gap:0;padding:16px;padding-inline-end:0}
+  .sidebar{
+    display:flex;flex-direction:column;gap:20px;position:sticky;top:16px;height:calc(100dvh - 32px);padding:20px;border-radius:var(--r-xl)
+  }
+  .bottom-nav,.brand-m{display:none}
+  .main{width:100%;padding:8px 28px 40px}
+  .topbar h1{text-align:start;font-size:1.4rem}
+  .bucket-grid{grid-template-columns:repeat(3,1fr)}
+  .brand{display:flex;align-items:center;gap:12px;font-size:1.15rem}
+  .sidebar nav{display:flex;flex-direction:column;gap:6px}
+  .nav-item{display:flex;align-items:center;gap:12px;min-height:48px;padding:0 14px;border-radius:var(--r-md);color:var(--text-dim);font-weight:600;position:relative;transition:background var(--dur-2),color var(--dur-2)}
+  .nav-item:hover{background:var(--glass-bg);color:var(--text)}
+  .nav-item.active{color:var(--text);background:linear-gradient(135deg,color-mix(in srgb,var(--a1) 32%,transparent),color-mix(in srgb,var(--a2) 20%,transparent))}
+  .nav-item.active svg{color:var(--a1)}
+  .side-foot{margin-top:auto;font-size:.75rem}
+  .view{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;align-items:start}
+  .view>*{grid-column:span 12}
+  .view>.hero{grid-column:span 12}
+  .view>.reminder{grid-column:span 4;align-self:stretch}
+  .view>.two-col{grid-template-columns:1fr 1fr}
+}
+@media (min-width:1500px){
+  .bucket-grid{grid-template-columns:repeat(5,1fr)}
+}

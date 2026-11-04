@@ -1,0 +1,26 @@
+{
+  "id": "finance-manager",
+  "name": "مدیریت مالی",
+  "short_name": "مدیریت مالی",
+  "description": "تقسیم درآمد بین صندوق‌ها و مدیریت پس‌انداز؛ آفلاین و خصوصی",
+  "lang": "fa",
+  "dir": "rtl",
+  "start_url": "./?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#060a18",
+  "theme_color": "#060a18",
+  "categories": ["finance", "productivity"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "shortcuts": [
+    { "name": "واریزی جدید", "short_name": "واریزی", "url": "./?tab=deposits", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "تاریخچه", "short_name": "تاریخچه", "url": "./?tab=history", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
+  ]
+}

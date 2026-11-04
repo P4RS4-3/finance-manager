@@ -1,0 +1,160 @@
+/* ==========================================================================
+   مدیریت مالی — توکن‌های طراحی و تم‌ها
+   هر تم فقط متغیرها را عوض می‌کند؛ همه‌ی اجزا از همین متغیرها استفاده می‌کنند.
+   ========================================================================== */
+
+:root {
+  /* مقیاس‌ها (از تنظیمات تغییر می‌کنند) */
+  --fs-scale: 1;
+  --blur: 26px;              /* شدت تاری شیشه */
+  --glass-sat: 1.45;
+  --aurora-op: .75;          /* شدت پس‌زمینه‌ی متحرک */
+  --fx: 1;                   /* ضریب کلی افکت‌ها (0 تا 1.4) */
+  --tilt-max: 7deg;
+
+  /* شکل‌ها */
+  --r-xl: 28px;
+  --r-lg: 22px;
+  --r-md: 16px;
+  --r-sm: 12px;
+  --r-pill: 999px;
+
+  /* فاصله‌ها */
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 20px; --sp-6: 28px; --sp-7: 40px;
+
+  /* زمان‌بندی */
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --ease-spring: cubic-bezier(.34, 1.56, .64, 1);
+  --dur-1: 140ms; --dur-2: 260ms; --dur-3: 520ms;
+
+  /* فونت */
+  --font-ui: "Vazir", Tahoma, "Segoe UI", "Noto Naskh Arabic", system-ui, sans-serif;
+  --font-num: var(--font-ui);
+
+  /* رنگ‌های معنایی (مستقل از تم) */
+  --pos: #34d399;
+  --neg: #fb7185;
+  --warn: #fbbf24;
+}
+
+/* --------------------------- تم‌های تیره --------------------------- */
+
+:root,
+[data-theme="midnight"] {
+  color-scheme: dark;
+  --bg-0: #060a18; --bg-1: #0b1230;
+  --a1: #5b8cff; --a2: #8f6bff; --a3: #22d3ee;
+  --text: #eaf0ff; --text-dim: #9fabc9; --text-faint: #6b7794;
+  --glass-bg: rgba(255,255,255,.065); --glass-bg-2: rgba(255,255,255,.11);
+  --glass-border: rgba(255,255,255,.14); --glass-hi: rgba(255,255,255,.22);
+  --glass-shadow: 0 18px 50px -18px rgba(0,0,0,.65);
+  --track: rgba(255,255,255,.09);
+  --on-accent: #06102a;
+}
+[data-theme="violet"] {
+  --bg-0: #0b061a; --bg-1: #1a0b3b;
+  --a1: #a855f7; --a2: #ec4899; --a3: #6366f1;
+  --text: #f4ecff; --text-dim: #b8a6d8; --text-faint: #7d6ca0;
+  --on-accent: #1a0630;
+}
+[data-theme="ocean"] {
+  --bg-0: #031018; --bg-1: #06263a;
+  --a1: #14b8a6; --a2: #0ea5e9; --a3: #22d3ee;
+  --text: #e6fbff; --text-dim: #9cc4cf; --text-faint: #5f8794;
+  --on-accent: #03222b;
+}
+[data-theme="sunset"] {
+  --bg-0: #180812; --bg-1: #2e0f1f;
+  --a1: #fb923c; --a2: #f43f5e; --a3: #f59e0b;
+  --text: #fff1ea; --text-dim: #d4aa9c; --text-faint: #957366;
+  --on-accent: #2a0a05;
+}
+[data-theme="forest"] {
+  --bg-0: #04100a; --bg-1: #082a1a;
+  --a1: #34d399; --a2: #84cc16; --a3: #10b981;
+  --text: #e9fff3; --text-dim: #9ccbb2; --text-faint: #5e8a74;
+  --on-accent: #032313;
+}
+[data-theme="graphite"] {
+  --bg-0: #0a0b0e; --bg-1: #16181d;
+  --a1: #94a3b8; --a2: #cbd5e1; --a3: #64748b;
+  --text: #eef1f5; --text-dim: #a2abb8; --text-faint: #6a7280;
+  --on-accent: #0d1117;
+}
+[data-theme="amoled"] {
+  --bg-0: #000000; --bg-1: #04050a;
+  --a1: #60a5fa; --a2: #a78bfa; --a3: #34d399;
+  --text: #f2f5fb; --text-dim: #a0a8b8; --text-faint: #666e7e;
+  --glass-bg: rgba(255,255,255,.055); --glass-border: rgba(255,255,255,.12);
+  --on-accent: #02060f;
+}
+[data-theme="ruby"] {
+  --bg-0: #14050a; --bg-1: #2a0813;
+  --a1: #f43f5e; --a2: #e11d48; --a3: #fb7185;
+  --text: #ffeef1; --text-dim: #d4a1ab; --text-faint: #96626c;
+  --on-accent: #30040d;
+}
+[data-theme="gold"] {
+  --bg-0: #110c03; --bg-1: #241a08;
+  --a1: #fbbf24; --a2: #f59e0b; --a3: #fde68a;
+  --text: #fff8e6; --text-dim: #d4c08a; --text-faint: #8f7f55;
+  --on-accent: #2a1c02;
+}
+[data-theme="rose"] {
+  --bg-0: #170812; --bg-1: #2c0e24;
+  --a1: #f472b6; --a2: #fb7185; --a3: #c084fc;
+  --text: #ffeef8; --text-dim: #d3a6c3; --text-faint: #956b86;
+  --on-accent: #2c0620;
+}
+
+/* --------------------------- تم‌های روشن --------------------------- */
+
+[data-theme="paper"] {
+  color-scheme: light;
+  --bg-0: #f1ede4; --bg-1: #fbf8f1;
+  --a1: #3b6cf0; --a2: #7c5cff; --a3: #0ea5a4;
+  --text: #1c1a17; --text-dim: #5d5850; --text-faint: #8d877c;
+  --glass-bg: rgba(255,255,255,.62); --glass-bg-2: rgba(255,255,255,.82);
+  --glass-border: rgba(40,30,10,.10); --glass-hi: rgba(255,255,255,.95);
+  --glass-shadow: 0 18px 44px -22px rgba(60,40,10,.35);
+  --track: rgba(40,30,10,.08);
+  --on-accent: #ffffff;
+  --pos: #059669; --neg: #e11d48; --warn: #d97706;
+}
+[data-theme="ice"] {
+  color-scheme: light;
+  --bg-0: #e6f1f9; --bg-1: #f7fbff;
+  --a1: #0ea5e9; --a2: #6366f1; --a3: #14b8a6;
+  --text: #0b1b2b; --text-dim: #496177; --text-faint: #7d93a6;
+  --glass-bg: rgba(255,255,255,.58); --glass-bg-2: rgba(255,255,255,.8);
+  --glass-border: rgba(10,60,110,.12); --glass-hi: rgba(255,255,255,.95);
+  --glass-shadow: 0 18px 44px -22px rgba(10,60,110,.35);
+  --track: rgba(10,60,110,.08);
+  --on-accent: #ffffff;
+  --pos: #059669; --neg: #e11d48; --warn: #d97706;
+}
+
+/* --------------------------- پالت رنگ صندوق‌ها --------------------------- */
+:root {
+  --c-sky: #38bdf8;     --c-indigo: #6366f1;  --c-violet: #a78bfa;  --c-pink: #f472b6;
+  --c-rose: #fb7185;    --c-orange: #fb923c;  --c-amber: #fbbf24;   --c-lime: #a3e635;
+  --c-emerald: #34d399; --c-teal: #2dd4bf;    --c-cyan: #22d3ee;    --c-slate: #94a3b8;
+}
+
+/* --------------------------- تم‌های رنگی بیشتر --------------------------- */
+[data-theme="turquoise"]{--bg-0:#021615;--bg-1:#053033;--a1:#2dd4bf;--a2:#22d3ee;--a3:#5eead4;--text:#e6fffb;--text-dim:#9cd0c9;--text-faint:#5d908a;--on-accent:#03201e}
+[data-theme="neon"]{--bg-0:#07040f;--bg-1:#16072e;--a1:#22ffd0;--a2:#ff3df2;--a3:#7c4dff;--text:#f5f0ff;--text-dim:#b4a6d8;--text-faint:#77699d;--on-accent:#07040f;--glass-border:rgba(255,255,255,.16)}
+[data-theme="aurora"]{--bg-0:#04121a;--bg-1:#0a2a2e;--a1:#4ade80;--a2:#38bdf8;--a3:#a78bfa;--text:#ebfff5;--text-dim:#9fcdb9;--text-faint:#5f8c78;--on-accent:#03200f}
+[data-theme="chocolate"]{--bg-0:#120a06;--bg-1:#2a160c;--a1:#d9a066;--a2:#c2703d;--a3:#f2c48d;--text:#fff3e8;--text-dim:#cfae92;--text-faint:#8f7260;--on-accent:#2a1306}
+[data-theme="lime"]{--bg-0:#0a0f03;--bg-1:#18240a;--a1:#bef264;--a2:#84cc16;--a3:#facc15;--text:#f6ffe0;--text-dim:#b9cc8f;--text-faint:#7b8c58;--on-accent:#18240a}
+[data-theme="deepsea"]{--bg-0:#020617;--bg-1:#0c1e4a;--a1:#3b82f6;--a2:#06b6d4;--a3:#6366f1;--text:#e8f0ff;--text-dim:#9aaed6;--text-faint:#5d7098;--on-accent:#02102b}
+[data-theme="volcano"]{--bg-0:#120503;--bg-1:#2b0c06;--a1:#ff5a1f;--a2:#ff2d55;--a3:#ffb020;--text:#fff0ea;--text-dim:#d7a89a;--text-faint:#97695c;--on-accent:#2b0a02}
+[data-theme="lilac"]{--bg-0:#0e0a1a;--bg-1:#241a3d;--a1:#c4b5fd;--a2:#f0abfc;--a3:#93c5fd;--text:#f6f1ff;--text-dim:#bcaee0;--text-faint:#7f72a3;--on-accent:#1b1036}
+
+[data-theme="mint"],[data-theme="peach"],[data-theme="lavender"],[data-theme="sky"]{
+  color-scheme:light;--glass-bg:rgba(255,255,255,.6);--glass-bg-2:rgba(255,255,255,.82);--glass-border:rgba(20,40,60,.11);--glass-hi:rgba(255,255,255,.95);
+  --glass-shadow:0 18px 44px -22px rgba(30,40,70,.35);--track:rgba(20,40,60,.08);--on-accent:#fff;--pos:#059669;--neg:#e11d48;--warn:#d97706}
+[data-theme="mint"]{--bg-0:#e3f5ee;--bg-1:#f4fcf8;--a1:#10b981;--a2:#06b6d4;--a3:#84cc16;--text:#0b2a20;--text-dim:#46675b;--text-faint:#7a9a8e}
+[data-theme="peach"]{--bg-0:#fbe9e0;--bg-1:#fff6f1;--a1:#f97316;--a2:#ec4899;--a3:#f59e0b;--text:#2b1408;--text-dim:#7a5545;--text-faint:#a8877a}
+[data-theme="lavender"]{--bg-0:#ece8fb;--bg-1:#f8f6ff;--a1:#7c3aed;--a2:#d946ef;--a3:#6366f1;--text:#1a1033;--text-dim:#5a4d80;--text-faint:#8d82ad}
+[data-theme="sky"]{--bg-0:#dff0ff;--bg-1:#f3f9ff;--a1:#2563eb;--a2:#0ea5e9;--a3:#8b5cf6;--text:#0a1a33;--text-dim:#4a6385;--text-faint:#7f93ad}

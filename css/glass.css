@@ -1,0 +1,37 @@
+/* سطح‌های شیشه‌ای */
+.glass{
+  position:relative;
+  background:linear-gradient(145deg,var(--glass-bg-2),var(--glass-bg));
+  border:1px solid var(--glass-border);
+  border-radius:var(--r-lg);
+  -webkit-backdrop-filter:blur(var(--blur)) saturate(var(--glass-sat));
+  backdrop-filter:blur(var(--blur)) saturate(var(--glass-sat));
+  box-shadow:var(--glass-shadow),inset 0 1px 0 var(--glass-hi);
+  overflow:hidden;
+  transition:transform var(--dur-2) var(--ease),border-color var(--dur-2);
+}
+/* نور دنبال‌کننده‌ی اشاره‌گر */
+.glass::before{
+  content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+  background:radial-gradient(380px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,calc(.13 * var(--fx))),transparent 60%);
+  opacity:0;transition:opacity var(--dur-2);
+}
+.glass:hover::before{opacity:1}
+[data-fx-spot="off"] .glass::before{display:none}
+.glass.tilt{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));will-change:transform}
+.glass-flat{border-radius:var(--r-md)}
+.chip{
+  display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:var(--r-pill);
+  background:var(--glass-bg);border:1px solid var(--glass-border);font-size:.8rem;color:var(--text-dim)
+}
+.btn{
+  position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:44px;padding:0 18px;border-radius:var(--r-md);
+  background:var(--glass-bg-2);border:1px solid var(--glass-border);font-weight:600;
+  transition:transform var(--dur-1) var(--ease),background var(--dur-2);
+}
+.btn:active{transform:scale(.97)}
+.btn.primary{background:linear-gradient(135deg,var(--a1),var(--a2));color:var(--on-accent);border-color:transparent}
+.icon-btn{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--glass-bg);border:1px solid var(--glass-border)}
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.35);transform:scale(0);animation:rip .6s var(--ease) forwards;pointer-events:none}
+@keyframes rip{to{transform:scale(1);opacity:0}}
