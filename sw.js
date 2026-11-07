@@ -1,29 +1,13 @@
-/* سرویس‌ورکر مدیریت مالی — نسخه 1.1.0
+/* سرویس‌ورکر مدیریت مالی — نسخه 1.1.1
    پیش‌کش اتمیک: همه‌ی فایل‌ها در یک کش نسخه‌دار ذخیره می‌شوند؛ اگر یکی ناقص بود، نسخه‌ی قبلی دست‌نخورده می‌ماند. */
-const VERSION = '1.1.0';
-const CACHE = 'fm-' + VERSION;
+const VERSION = '1.1.1';
+const CACHE = 'fm-' + VERSION + '.952cf364';
 const FILES = [
  "./",
- "css/base.css",
- "css/components.css",
- "css/glass.css",
- "css/layout.css",
- "css/tokens.css",
+ "app.aa0a0d6e.css",
+ "app.d1cd5dad.js",
  "favicon.svg",
- "fonts/Estedad-Variable.woff2",
- "fonts/FarYekan-Regular.ttf",
- "fonts/Gandom-Regular.woff",
- "fonts/IranianSans-Bold.ttf",
- "fonts/IranianSans-Regular.ttf",
- "fonts/Parastoo-Regular.woff",
- "fonts/Sahel-Black.woff",
- "fonts/Sahel-Bold.woff",
- "fonts/Sahel-Regular.woff",
- "fonts/Samim-Bold.woff2",
- "fonts/Samim-Regular.woff2",
- "fonts/Vazir-Bold.woff2",
- "fonts/Vazir-Medium.woff2",
- "fonts/Vazir-Regular.woff2",
+ "fonts/Vazirmatn-Variable.woff2",
  "icons/apple-touch-icon.png",
  "icons/favicon-32.png",
  "icons/favicon-48.png",
@@ -32,60 +16,20 @@ const FILES = [
  "icons/icon.svg",
  "icons/maskable-512.png",
  "index.html",
- "js/core/backup.js",
- "js/core/changelog.js",
- "js/core/exporters.js",
- "js/core/fonts.js",
- "js/core/format.js",
- "js/core/jalali.js",
- "js/core/ledger.js",
- "js/core/loans.js",
- "js/core/months.js",
- "js/core/pin.js",
- "js/core/prefs.js",
- "js/core/reminders.js",
- "js/core/review.js",
- "js/core/stats.js",
- "js/core/words.js",
- "js/core/zip.js",
- "js/data/db.js",
- "js/data/defaults.js",
- "js/data/demo.js",
- "js/data/store.js",
- "js/i18n/fa.js",
- "js/main.js",
- "js/ui/buckets.js",
- "js/ui/charts.js",
- "js/ui/deposit.js",
- "js/ui/effects.js",
- "js/ui/exports.js",
- "js/ui/fields.js",
- "js/ui/forms.js",
- "js/ui/history.js",
- "js/ui/home.js",
- "js/ui/icons.js",
- "js/ui/install.js",
- "js/ui/loans.js",
- "js/ui/lock.js",
- "js/ui/manage.js",
- "js/ui/modal.js",
- "js/ui/onboarding.js",
- "js/ui/reminders.js",
- "js/ui/review.js",
- "js/ui/search.js",
- "js/ui/settings.js",
- "js/ui/shell.js",
- "js/ui/txlist.js",
- "js/ui/updater.js",
  "manifest.webmanifest"
 ];
 
 self.addEventListener('install', e => {
-  e.waitUntil((async () => {
+  e.waitUntil((async () => { try {
     const c = await caches.open(CACHE);
-    // cache:'reload' یعنی کش HTTP مرورگر/GitHub نادیده گرفته شود تا فایل تازه گرفته شود
-    await Promise.all(FILES.map(async f => { const r = await fetch(new Request(f, { cache: 'reload' })); if (!r.ok) throw new Error('precache failed: ' + f); await c.put(f, r); }));
-  })());
+    // دو لایه ضد کش کهنه: cache:'reload' (کش مرورگر) + پارامتر ?fm=نسخه (کش CDN گیت‌هاب که تا ~۱۰ دقیقه فایل قدیمی می‌دهد).
+    // پاسخ زیر کلید تمیز (بدون پارامتر) ذخیره می‌شود.
+    const bust = f => f + (f.includes('?') ? '&' : '?') + 'fm=' + VERSION;
+    await Promise.all(FILES.map(async f => { const r = await fetch(new Request(bust(f), { cache: 'reload' })); if (!r.ok) throw new Error('precache failed: ' + f); await c.put(f, r); }));
+    // اگر version.json تازه‌ی سرور با نسخه‌ی این SW نمی‌خواند، یعنی فایل‌ها نیمه‌به‌روز آپلود شده‌اند؛ نصب را رد می‌کنیم تا نسخه‌ی قبلی سالم بماند
+    const vr = await fetch(new Request(bust('version.json'), { cache: 'reload' }));
+    if (vr.ok) { const v = await vr.json(); if (v.version && v.version !== VERSION) throw new Error('version mismatch: ' + v.version + ' != ' + VERSION); }
+  } catch (err) { await caches.delete(CACHE); throw err; } })());
 });
 
 self.addEventListener('activate', e => {
@@ -111,6 +55,11 @@ self.addEventListener('fetch', e => {
     const c = await caches.open(CACHE);
     const hit = await c.match(req, { ignoreSearch: req.mode === 'navigate' }) || (req.mode === 'navigate' ? await c.match('./') : null);
     if (hit) return hit;
-    try { return await fetch(req); } catch { return new Response('آفلاین', { status: 503, headers: { 'Content-Type': 'text/plain; charset=utf-8' } }); }
+    try {
+      const r = await fetch(req);
+      // فونت‌های اختیاری: بار اول از شبکه، از آن به بعد از کش (آفلاین هم کار می‌کنند)
+      if (r.ok && url.pathname.includes('/fonts/')) c.put(req, r.clone());
+      return r;
+    } catch { return new Response('آفلاین', { status: 503, headers: { 'Content-Type': 'text/plain; charset=utf-8' } }); }
   })());
 });
