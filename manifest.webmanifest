@@ -20,6 +20,7 @@
     { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
   ],
   "shortcuts": [
+    { "name": "ثبت خرج", "short_name": "خرج", "url": "./?do=expense", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
     { "name": "واریزی جدید", "short_name": "واریزی", "url": "./?tab=deposits", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
     { "name": "تاریخچه", "short_name": "تاریخچه", "url": "./?tab=history", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
   ]
