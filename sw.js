@@ -1,11 +1,11 @@
-/* سرویس‌ورکر مدیریت مالی — نسخه 1.1.4
+/* سرویس‌ورکر مدیریت مالی — نسخه 1.1.5
    پیش‌کش اتمیک: همه‌ی فایل‌ها در یک کش نسخه‌دار ذخیره می‌شوند؛ اگر یکی ناقص بود، نسخه‌ی قبلی دست‌نخورده می‌ماند. */
-const VERSION = '1.1.4';
-const CACHE = 'fm-' + VERSION + '.d2152781';
+const VERSION = '1.1.5';
+const CACHE = 'fm-' + VERSION + '.671c678c';
 const FILES = [
  "./",
- "app.5759fa79.css",
- "app.eef64551.js",
+ "app.3dadd928.js",
+ "app.4f078ffa.css",
  "favicon.svg",
  "fonts/Vazirmatn-Variable.woff2",
  "icons/apple-touch-icon.png",

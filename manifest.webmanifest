@@ -22,6 +22,8 @@
   "shortcuts": [
     { "name": "ثبت خرج", "short_name": "خرج", "url": "./?do=expense", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
     { "name": "واریزی جدید", "short_name": "واریزی", "url": "./?tab=deposits", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "جستجو", "short_name": "جستجو", "url": "./?do=search", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
     { "name": "تاریخچه", "short_name": "تاریخچه", "url": "./?tab=history", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
-  ]
+  ],
+  "share_target": { "action": "./", "method": "GET", "params": { "title": "title", "text": "text", "url": "url" } }
 }
