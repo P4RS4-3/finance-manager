@@ -1,14 +1,28 @@
-/* سرویس‌ورکر مدیریت مالی — نسخه 1.1.6
+/* سرویس‌ورکر مدیریت مالی — نسخه 1.1.7
    پیش‌کش اتمیک: همه‌ی فایل‌ها در یک کش نسخه‌دار ذخیره می‌شوند؛ اگر یکی ناقص بود، نسخه‌ی قبلی دست‌نخورده می‌ماند. */
-const VERSION = '1.1.6';
-const CACHE = 'fm-' + VERSION + '.367e2221';
+const VERSION = '1.1.7';
+const CACHE = 'fm-' + VERSION + '.051f0689';
 const FILES = [
  "./",
- "app.649d773b.js",
- "app.896d41e3.css",
+ "app.7b626996.css",
+ "app.KO6VJAWJ.js",
+ "chunk.2ER5L3X7.js",
+ "chunk.2ZHNZYQM.js",
+ "chunk.BYRSWKJZ.js",
+ "chunk.FTY6UCYE.js",
+ "chunk.FXSUON5A.js",
+ "chunk.KMOVADZE.js",
+ "chunk.KV3UI3YY.js",
+ "chunk.LHYBWWDP.js",
+ "chunk.LSDIBEJ7.js",
+ "chunk.MUC2UBSL.js",
+ "chunk.OUI54MI2.js",
+ "chunk.RJKTROUF.js",
+ "chunk.SWPQ7YDU.js",
+ "chunk.UE6427NA.js",
+ "chunk.YM26KQO2.js",
  "favicon.svg",
  "fonts/Vazirmatn-Variable.woff2",
- "gesture-test.html",
  "icons/apple-touch-icon.png",
  "icons/favicon-32.png",
  "icons/favicon-48.png",
